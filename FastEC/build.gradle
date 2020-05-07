@@ -29,4 +29,5 @@ dependencies {
     implementation project(path: ':latte-ec')
     annotationProcessor project(path: ':latte-compiler')
     compile project(path: ':latte-core')
+    implementation 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
 }

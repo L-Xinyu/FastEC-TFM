@@ -1,19 +1,11 @@
 package es.upm.miw.fastec.fsatec_tfm;
 
-import androidx.appcompat.app.AppCompatActivity;
+import es.upm.miw.fastec.latte_core.actitives.ProxyActivity;
+import es.upm.miw.fastec.latte_core.delegates.LatteDelegate;
 
-import android.os.Bundle;
-import android.widget.Toast;
-
-import es.upm.miw.fastec.latte_core.app.Latte;
-
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends ProxyActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        Toast.makeText(Latte.getApplication(),"传入Context",Toast.LENGTH_LONG).show();
+    public LatteDelegate setRootDelegate() {
+        return new FastECDelegate();
     }
 }

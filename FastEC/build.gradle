@@ -29,5 +29,9 @@ dependencies {
     implementation project(path: ':latte-ec')
     annotationProcessor project(path: ':latte-compiler')
     compile project(path: ':latte-core')
+    //Font
     implementation 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
+    //Fragment
+    implementation 'me.yokeyword:fragmentationx:1.0.2'
+    implementation 'me.yokeyword:fragmentationx-swipeback:1.0.2'
 }

@@ -2,6 +2,7 @@ package es.upm.miw.fastec.fsatec_tfm;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -20,17 +21,18 @@ public class FastECDelegate extends LatteDelegate {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
         //Operations on controls
-        super.onBindView(savedInstanceState, rootView);
+        //super.onBindView(savedInstanceState, rootView);
+        testRestClient();
     }
 
     private void testRestClient(){
         RestClient.builder()
-                .url("")
-                .params("","")
+                .url("http://news.baidu.com/")
+                //.params("","")
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-
+                        Toast.makeText(getContext(),response,Toast.LENGTH_LONG).show();
                     }
                 })
                 .error(new IError() {
@@ -45,6 +47,7 @@ public class FastECDelegate extends LatteDelegate {
 
                     }
                 })
-                .build();
+                .build()
+                .get();
     }
 }

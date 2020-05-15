@@ -2,6 +2,7 @@ package es.upm.miw.fastec.latte_core.net;
 
 import android.content.Context;
 
+import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -23,6 +24,7 @@ public class RestClientBuilder {
     private RequestBody mBody = null;
     private LoaderStyle mLoaderStyle = null;
     private Context mContext = null;
+    private File mFile = null;
 
     RestClientBuilder(){
     }
@@ -79,7 +81,17 @@ public class RestClientBuilder {
         return this;
     }
 
+    public final RestClientBuilder file(File file){
+        this.mFile = file;
+        return this;
+    }
+
+    public final RestClientBuilder file(String file){
+        this.mFile = new File(file);
+        return this;
+    }
+
     public final RestClient build(){
-        return new RestClient(mUrl,PARAMS,mIRequest,mISuccess,mIFailure,mIError,mBody,mLoaderStyle,mContext);
+        return new RestClient(mUrl,PARAMS,mIRequest,mISuccess,mIFailure,mIError,mBody,mLoaderStyle,mContext,mFile);
     }
 }

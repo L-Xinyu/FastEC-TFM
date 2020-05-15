@@ -24,6 +24,10 @@ public class LatteLoader {
     //Default loading style
     private static final String DEFAULT_LOADER = LoaderStyle.BallSpinFadeLoaderIndicator.name();
 
+    public static void showLoading(Context context,Enum<LoaderStyle> type){
+        showLoading(context,type.name());
+    }
+
     public static void showLoading(Context context,String type){
 
         final AppCompatDialog dialog = new AppCompatDialog(context, R.style.dialog);

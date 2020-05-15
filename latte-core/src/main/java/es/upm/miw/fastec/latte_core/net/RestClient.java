@@ -1,5 +1,7 @@
 package es.upm.miw.fastec.latte_core.net;
 
+import android.content.Context;
+
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -8,6 +10,8 @@ import es.upm.miw.fastec.latte_core.net.callback.IFailure;
 import es.upm.miw.fastec.latte_core.net.callback.IRequest;
 import es.upm.miw.fastec.latte_core.net.callback.ISuccess;
 import es.upm.miw.fastec.latte_core.net.callback.RequestCallbacks;
+import es.upm.miw.fastec.latte_core.ui.LatteLoader;
+import es.upm.miw.fastec.latte_core.ui.LoaderStyle;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,6 +25,8 @@ public class RestClient {
     private final IFailure FAILURE;
     private final IError ERROR;
     private final RequestBody BODY;
+    private final LoaderStyle LOADER_STYLE;
+    private final Context CONTEXT;
 
     public RestClient(String url,
                       Map<String, Object> params,
@@ -28,7 +34,9 @@ public class RestClient {
                       ISuccess success,
                       IFailure failure,
                       IError error,
-                      RequestBody body) {
+                      RequestBody body,
+                      LoaderStyle loaderStyle,
+                      Context context) {
         this.URL = url;
         PARAMS.putAll(params);
         this.REQUEST = request;
@@ -36,6 +44,8 @@ public class RestClient {
         this.FAILURE = failure;
         this.ERROR = error;
         this.BODY = body;
+        this.LOADER_STYLE = loaderStyle;
+        this.CONTEXT = context;
     }
 
     public static RestClientBuilder builder(){
@@ -49,6 +59,11 @@ public class RestClient {
         if(REQUEST != null){
             REQUEST.onRequestStart();
         }
+        //show loading
+        if (LOADER_STYLE != null){
+            LatteLoader.showLoading(CONTEXT,LOADER_STYLE);
+        }
+
         switch (method){
             case GET:
                 call = service.get(URL,PARAMS);
@@ -77,7 +92,8 @@ public class RestClient {
                 REQUEST,
                 SUCCESS,
                 FAILURE,
-                ERROR
+                ERROR,
+                LOADER_STYLE
         );
     }
 

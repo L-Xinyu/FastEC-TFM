@@ -9,14 +9,14 @@ public class DimenUtil {
 
     public static int getScreenWidth(){
         //Get the width of the screen
-        final Resources resources = Latte.getApplication().getResources();
+        final Resources resources = Latte.getApplicationContext().getResources();
         final DisplayMetrics dm = resources.getDisplayMetrics();
         return dm.widthPixels;
     }
 
     public static int getScreenHeight(){
         //Get the height of the screen
-        final Resources resources = Latte.getApplication().getResources();
+        final Resources resources = Latte.getApplicationContext().getResources();
         final DisplayMetrics dm = resources.getDisplayMetrics();
         return dm.heightPixels;
     }

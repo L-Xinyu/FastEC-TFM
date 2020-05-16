@@ -11,6 +11,7 @@ import es.upm.miw.fastec.latte_core.net.callback.IFailure;
 import es.upm.miw.fastec.latte_core.net.callback.IRequest;
 import es.upm.miw.fastec.latte_core.net.callback.ISuccess;
 import es.upm.miw.fastec.latte_core.net.callback.RequestCallbacks;
+import es.upm.miw.fastec.latte_core.net.download.DownloadHandler;
 import es.upm.miw.fastec.latte_core.ui.LatteLoader;
 import es.upm.miw.fastec.latte_core.ui.LoaderStyle;
 import okhttp3.MediaType;
@@ -31,6 +32,9 @@ public class RestClient {
     private final LoaderStyle LOADER_STYLE;
     private final Context CONTEXT;
     private final File FILE;
+    private final String DOWNLOAD_DIR;
+    private final String EXTENSION;
+    private final String NAME;
 
     public RestClient(String url,
                       Map<String, Object> params,
@@ -41,7 +45,10 @@ public class RestClient {
                       RequestBody body,
                       LoaderStyle loaderStyle,
                       Context context,
-                      File file) {
+                      File file,
+                      String download_dir,
+                      String extension,
+                      String name) {
         this.URL = url;
         PARAMS.putAll(params);
         this.REQUEST = request;
@@ -52,6 +59,9 @@ public class RestClient {
         this.LOADER_STYLE = loaderStyle;
         this.CONTEXT = context;
         this.FILE = file;
+        this.DOWNLOAD_DIR = download_dir;
+        this.EXTENSION = extension;
+        this.NAME = name;
     }
 
     public static RestClientBuilder builder(){
@@ -146,4 +156,8 @@ public class RestClient {
         request(HttpMethod.DELETE);
     }
 
+    public final void download(){
+        new DownloadHandler(URL, PARAMS,REQUEST, DOWNLOAD_DIR, EXTENSION, NAME, SUCCESS, FAILURE, ERROR)
+                .handleDownload();
+    }
 }
